@@ -1,0 +1,78 @@
+$fa-font-path: "../webfonts";
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+
+@import '~admin-lte/build/scss/AdminLTE.scss';
+
+.app-shadow {
+    box-shadow: 0 2px 3px rgba(0,0,0,.16);
+}
+
+.content-wrapper {
+    overflow: auto;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #ffffff !important;
+    background: $gray-200;
+}
+
+.bg-info .dropdown-item {
+    color: #212529 !important;
+}
+
+@media only screen and (max-width: 700px){
+    .btn-block-xs {
+        display: block;
+        width: 100%;
+    }
+
+    // .modal-dialog {
+    //     position: fixed;
+    //     margin: 0;
+    //     width: 100%;
+    //     height: 100%;
+    //     padding: 0;
+    // }
+
+    // .modal-content {
+    //     position: absolute;
+    //     top: 0;
+    //     right: 0;
+    //     bottom: 0;
+    //     left: 0;
+    //     border-radius: 0;
+    //     border: 0;
+    // }
+
+    // .modal-header {
+    //     position: absolute;
+    //     top: 0;
+    //     right: 0;
+    //     left: 0;
+    //     height: 60px;
+    //     border-radius: 0;
+    // }
+
+    // .modal-body {
+    //     position: absolute;
+    //     top: 60px;
+    //     bottom: 60px;
+    //     width: 100%;
+    //     overflow: auto;
+    // }
+
+    // .modal-footer {
+    //     position: absolute;
+    //     right: 0;
+    //     bottom: 0;
+    //     left: 0;
+    //     height: 60px;
+    // }
+}
