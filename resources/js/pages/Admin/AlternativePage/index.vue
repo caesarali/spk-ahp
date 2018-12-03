@@ -37,35 +37,28 @@
                                     <th width=10>#</th>
                                     <th>Name</th>
                                     <th class="text-center">Code</th>
-                                    <th>Tarif</th>
-                                    <th>Fasilitas</th>
-                                    <th>Luas</th>
-                                    <th>Parkiran</th>
-                                    <th>Keamanan</th>
+                                    <th v-for="item in criterias" :key="item.id">{{ item.name }}</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="x in 5" :key="x">
-                                    <td>{{ x }}</td>
-                                    <td>Sampel Wisma {{ x }}</td>
+                                <tr v-for="(item, index) in data" :key="item.id">
+                                    <td>{{ index+1 }}.</td>
+                                    <td>{{ item.name }}</td>
                                     <td class="text-center">
-                                        <span class="badge badge-info">Alt{{ x }}</span>
+                                        <span class="badge badge-info">{{ item.code }}</span>
                                     </td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td v-for="x in criterias.length" :key="x">-</td>
                                     <td class="text-right" nowrap>
-                                        <a href="#" class="text-secondary mx-2">
+                                        <a href="#" @click.prevent="edit(item)" class="text-secondary mx-2">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <a href="#" class="text-secondary mx-2">
+                                        <a href="#" @click.prevent="destroy(item.id)" class="text-secondary mx-2">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
                                     </td>
                                 </tr>
+                                <row-empty v-if="data.length == 0" :cols="4 + criterias.length" />
                             </tbody>
                         </table>
                     </div>
@@ -73,7 +66,7 @@
             </div>
         </section>
 
-        <div class="modal fade" role="dialog" aria-hidden="true">
+        <div id="alternativeModal" class="modal fade" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -103,34 +96,10 @@
                             <h5 class="mb-0">Kriteria Alternatif / Wisma</h5>
                         </div>
                         <div class="modal-body pb-0">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Tarif</label>
+                            <div class="form-group row" v-for="item in criterias" :key="item.id">
+                                <label class="col-sm-3 col-form-label">{{ item.name }}</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Tarif sewa kamar..">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Fasilitas</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Fasilitas kamar..">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Luas (m)</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Luas kamar..">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Parkiran</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Daya tampung parkiran..">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label" style="white-space: nowrap">Pos Keamanan</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Jumlah pos keamanan..">
+                                    <input type="text" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -152,7 +121,10 @@ export default {
     data() {
         return {
             keyword: '',
+            criterias: [],
+            alternatives: [],
             form: new Form({
+                id: '',
                 code: '',
                 name: '',
             })
@@ -160,30 +132,70 @@ export default {
     },
     computed: {
         data() {
-            // return this.users.filter(user => {
-            //     return user.name.toLowerCase().includes(this.keyword.toLowerCase())
-            // })
+            return this.alternatives.filter(alternative => {
+                return alternative.name.toLowerCase().includes(this.keyword.toLowerCase())
+            })
         }
     },
     methods: {
+        init() {
+            axios.all([this.getCriteria(), this.getAlternative()])
+        },
+        getCriteria() {
+            return axios.get('/criterias').then(({ data }) => { this.criterias = data.data })
+        },
+        getAlternative() {
+            return axios.get('/alternatives').then(({ data }) => { this.alternatives = data.data })
+        },
         create() {
             this.editmode = false;
             this.form.reset();
             this.form.clear();
-            $('.modal').modal('show');
+            $('#alternativeModal').modal('show');
         },
         store() {
-
+            this.form.post('/alternatives')
+            .then(({ data }) => {
+                this.alternatives.push(data.data)
+                toast({type: 'success', text: data.message})
+                $('#alternativeModal').modal('hide');
+            })
+            .catch()
         },
         edit(data) {
-
+            this.editmode = true;
+            this.form.reset();
+            this.form.clear();
+            this.form.fill(data);
+            $('#alternativeModal').modal('show');
         },
         update() {
-
+            this.form.patch('/alternatives/' + this.form.id)
+            .then(({ data }) => {
+                this.getAlternative();
+                toast({type: 'success', text: data.message});
+                $('#alternativeModal').modal('hide');
+            })
+            .catch()
         },
         destroy(id) {
-
+            this.$confirm.delete().then((result) => {
+                if (result.value) {
+                    this.form.delete('/alternatives/' + id)
+                    .then(({ data }) => {
+                        toast({ type: 'success', title: data.message });
+                        this.getAlternative();
+                    })
+                    .catch(() => {
+                        toast({ type: 'error', title: 'Terjadi Kesalahan!' });
+                    });
+                }
+            })
         }
+    },
+
+    created() {
+        this.init()
     }
 }
 </script>

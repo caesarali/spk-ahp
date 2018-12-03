@@ -41,21 +41,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="x in 5" :key="x">
-                                    <td>{{ x }}</td>
-                                    <td>Sample Kriteria {{ x }}</td>
+                                <tr v-for="(item, index) in data" :key="item.id">
+                                    <td>{{ index+1 }}.</td>
+                                    <td>{{ item.name }}</td>
                                     <td class="text-center">
-                                        <span class="badge badge-info">C{{ x }}</span>
+                                        <span class="badge badge-info">{{ item.code }}</span>
                                     </td>
                                     <td class="text-right" nowrap>
-                                        <a href="#" class="text-secondary mx-2">
+                                        <a href="#" @click.prevent="edit(item)" class="text-secondary mx-2">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <a href="#" class="text-secondary mx-2">
+                                        <a href="#" @click.prevent="destroy(item.id)" class="text-secondary mx-2">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
                                     </td>
                                 </tr>
+                                <row-empty v-if="data.length == 0" cols="4" />
                             </tbody>
                         </table>
                     </div>
@@ -63,7 +64,7 @@
             </div>
         </section>
 
-        <div class="modal fade" role="dialog" aria-hidden="true">
+        <div id="criteriaModal" class="modal fade" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -107,7 +108,9 @@ export default {
     data() {
         return {
             keyword: '',
+            criterias: [],
             form: new Form({
+                id: '',
                 code: '',
                 name: '',
             })
@@ -115,12 +118,16 @@ export default {
     },
     computed: {
         data() {
-            // return this.users.filter(user => {
-            //     return user.name.toLowerCase().includes(this.keyword.toLowerCase())
-            // })
+            return this.criterias.filter(criteria => {
+                return criteria.name.toLowerCase().includes(this.keyword.toLowerCase())
+            })
         }
     },
     methods: {
+        init() {
+            axios.get('/criterias')
+            .then(({ data }) => { this.criterias = data.data })
+        },
         create() {
             this.editmode = false;
             this.form.reset();
@@ -128,17 +135,48 @@ export default {
             $('.modal').modal('show');
         },
         store() {
-
+            this.form.post('/criterias')
+            .then(({ data }) => {
+                this.criterias.push(data.data)
+                toast({type: 'success', text: data.message})
+                $('#criteriaModal').modal('hide');
+            })
+            .catch()
         },
         edit(data) {
-
+            this.editmode = true;
+            this.form.reset();
+            this.form.clear();
+            this.form.fill(data);
+            $('.modal').modal('show');
         },
         update() {
-
+            this.form.patch('/criterias/' + this.form.id)
+            .then(({ data }) => {
+                this.init();
+                toast({type: 'success', text: data.message});
+                $('#criteriaModal').modal('hide');
+            })
+            .catch()
         },
         destroy(id) {
-
+            this.$confirm.delete().then((result) => {
+                if (result.value) {
+                    this.form.delete('/criterias/' + id)
+                    .then(({ data }) => {
+                        toast({ type: 'success', title: data.message });
+                        this.init();
+                    })
+                    .catch(() => {
+                        toast({ type: 'error', title: 'Terjadi Kesalahan!' });
+                    });
+                }
+            })
         }
+    },
+
+    created() {
+        this.init()
     }
 }
 </script>

@@ -13,6 +13,7 @@
                         <div class="col-sm-3 mb-3">
                             <select class="form-control">
                                 <option value="" disabled hidden selected>Pilih Kriteria</option>
+                                <option v-for="item in criterias" :key="item.id" :value="item.id">{{ item.code }} - {{ item.name }}</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3">
@@ -23,6 +24,7 @@
                         <div class="col-sm-3 mb-3">
                             <select class="form-control">
                                 <option value="" disabled hidden selected>Pilih Kriteria</option>
+                                <option v-for="item in criterias" :key="item.id" :value="item.id">{{ item.code }} - {{ item.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -32,17 +34,12 @@
                         <thead class="table-info">
                             <tr>
                                 <th class="text-center">Kriteria</th>
-                                <th class="text-center">C1</th>
-                                <th class="text-center">C2</th>
-                                <th class="text-center">C3</th>
-                                <th class="text-center">C4</th>
-                                <th class="text-center">C5</th>
+                                <th class="text-center" v-for="item in criterias" :key="item.id">{{ item.code }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="x in 5" :key="x">
-                                <th class="text-center table-info">C{{ x }}</th>
-                                <td class="text-center">-</td>
+                            <tr v-for="item in criterias" :key="item.id">
+                                <th class="text-center table-info">{{ item.code }}</th>
                                 <td class="text-center">-</td>
                                 <td class="text-center">-</td>
                                 <td class="text-center">-</td>
@@ -63,6 +60,20 @@
 
 <script>
 export default {
+    data() {
+        return {
+            criterias: []
+        }
+    },
 
+    methods: {
+        init() {
+            axios.get('/criterias').then(({ data }) => { this.criterias = data.data })
+        }
+    },
+
+    created() {
+        this.init()
+    }
 }
 </script>

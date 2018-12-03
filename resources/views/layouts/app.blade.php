@@ -103,7 +103,7 @@
                             </router-link>
                         </li>
 
-                        @if(Auth::user()->hasRole('superadmin'))
+                        {{-- @if(Auth::user()->hasRole('superadmin'))
                             <li class="nav-header">SPECIAL MENU</li>
                             <li class="nav-item">
                                 <router-link :to="{ name: 'roles' }" class="nav-link">
@@ -117,7 +117,7 @@
                                     <p>Laravolt</p>
                                 </router-link>
                             </li>
-                        @endif
+                        @endif --}}
                     </ul>
                 </nav>
             </div>
