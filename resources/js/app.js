@@ -28,7 +28,7 @@ window.toast = toast;
 
 // App
 import router from './routes';
-import Confirm from './commons/confirm';
+import Confirm from './commons/Confirm';
 Vue.prototype.$confirm = new Confirm;
 
 // Global Components

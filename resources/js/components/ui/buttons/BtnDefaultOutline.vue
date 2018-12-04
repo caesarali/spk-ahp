@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-info" @click="click">
+    <button class="btn btn-outline-info" @click="click">
         <slot>Button Default</slot>
     </button>
 </template>

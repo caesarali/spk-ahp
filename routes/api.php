@@ -22,4 +22,9 @@ Route::namespace('API')->group(function () {
         Route::apiResource('criterias', 'CriteriaController')->except('show');
         Route::apiResource('alternatives', 'AlternativeController')->except('show');
     });
+
+    Route::namespace('Analysis')->prefix('analysis')->group(function () {
+        Route::get('criteria', 'CriteriaAnalysisController@index');
+        Route::post('criteria', 'CriteriaAnalysisController@store');
+    });
 });

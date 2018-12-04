@@ -157,7 +157,7 @@ export default {
             this.form.post('/alternatives')
             .then(({ data }) => {
                 this.alternatives.push(data.data)
-                toast({type: 'success', text: data.message})
+                toast({ type: 'success', text: data.message })
                 $('#alternativeModal').modal('hide');
             })
             .catch()
