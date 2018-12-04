@@ -12,6 +12,7 @@ import Alternative from '../pages/Admin/AlternativePage'
 // Analisis Components
 import Analysis from '../pages/AnalysisPage'
 import AnalysisCriteria from '../pages/AnalysisPage/AnalysisCriteriaPage'
+import AnalysisCriteriaResult from '../pages/AnalysisPage/AnalysisCriteriaPage/AnalysisCriteriaResult'
 import AnalysisAlternative from '../pages/AnalysisPage/AnalysisAlternativePage'
 
 const router = new Router({
@@ -25,6 +26,7 @@ const router = new Router({
         { path: '/home', name: 'home', redirect: '/admin' },
         { path: '/analysis', component: Analysis, children: [
             { path: 'criterias', name: 'analysis.criteria', component: AnalysisCriteria },
+            { path: 'criteria/result', name: 'analysis.criteria.result', component: AnalysisCriteriaResult },
             { path: 'alternatives', name: 'analysis.alternative', component: AnalysisAlternative }
         ]},
         { path: '/admin', component: Admin, children: [

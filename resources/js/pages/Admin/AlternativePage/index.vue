@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="content-header">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="form-inline">
@@ -25,7 +25,7 @@
         </section>
 
         <section class="content px-2">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="card">
                     <div class="card-header">
                         Data Alternatif

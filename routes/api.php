@@ -21,10 +21,12 @@ Route::namespace('API')->group(function () {
     Route::namespace('Master')->group(function () {
         Route::apiResource('criterias', 'CriteriaController')->except('show');
         Route::apiResource('alternatives', 'AlternativeController')->except('show');
+        Route::get('rating-scales', 'RatingScaleController@index');
     });
 
     Route::namespace('Analysis')->prefix('analysis')->group(function () {
         Route::get('criteria', 'CriteriaAnalysisController@index');
         Route::post('criteria', 'CriteriaAnalysisController@store');
+        Route::get('criteria/result', 'CriteriaAnalysisController@result');
     });
 });

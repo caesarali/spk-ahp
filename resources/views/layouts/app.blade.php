@@ -28,7 +28,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-collapse">
     <div id="app" class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-dark bg-info app-shadow">
             {{-- Left Menu --}}
@@ -124,7 +124,9 @@
         </aside>
 
         <div class="content-wrapper">
-            @yield('content')
+            {{-- <div class="container"> --}}
+                    @yield('content')
+            {{-- </div> --}}
         </div>
 
         <aside class="control-sidebar control-sidebar-light">

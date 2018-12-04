@@ -25,10 +25,26 @@ class CriteriaAnalysisController extends Controller
         ]);
         $firstCriteria = $request->first_criteria_id;
         $secondCriteria = $request->second_criteria_id;
-        $matrix = CriteriaComparison::updateOrCreate(
-            ['first_criteria_id' => $firstCriteria, 'second_criteria_id' => $secondCriteria],
-            ['value' => $request->value]
-        );
+        if ($firstCriteria == $secondCriteria) {
+            $matrix = CriteriaComparison::updateOrCreate(
+                ['first_criteria_id' => $firstCriteria, 'second_criteria_id' => $secondCriteria],
+                ['value' => 1]
+            );
+        } else {
+            $matrix = CriteriaComparison::updateOrCreate(
+                ['first_criteria_id' => $firstCriteria, 'second_criteria_id' => $secondCriteria],
+                ['value' => $request->value]
+            );
+            $invers = CriteriaComparison::updateOrCreate(
+                ['first_criteria_id' => $secondCriteria, 'second_criteria_id' => $firstCriteria],
+                ['value' => 1 / $request->value]
+            );
+        }
         return response()->json(['message' => 'Pembobotan disimpan!']);
+    }
+
+    public function result()
+    {
+
     }
 }

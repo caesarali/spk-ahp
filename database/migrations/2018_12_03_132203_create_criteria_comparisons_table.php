@@ -16,7 +16,7 @@ class CreateCriteriaComparisonsTable extends Migration
         Schema::create('criteria_comparisons', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('first_criteria_id');
-            $table->unsignedInteger('value');
+            $table->float('value');
             $table->unsignedInteger('second_criteria_id');
             $table->timestamps();
             $table->softDeletes();
