@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Master;
+namespace App\Http\Resources\Criteria;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CriteriaResource extends JsonResource
+class CriteriaComparisonSum extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,10 @@ class CriteriaResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'code' => $this->code,
             'name' => $this->name,
-            'code' => $this->code
+            'total' => round($this->comparisonsY->sum('value'), 4),
+            'total_normalization' => round($this->comparisonsY->sum('normalization_value'))
         ];
     }
 }

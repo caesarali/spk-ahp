@@ -25,8 +25,11 @@ Route::namespace('API')->group(function () {
     });
 
     Route::namespace('Analysis')->prefix('analysis')->group(function () {
-        Route::get('criteria', 'CriteriaAnalysisController@index');
-        Route::post('criteria', 'CriteriaAnalysisController@store');
-        Route::get('criteria/result', 'CriteriaAnalysisController@result');
+        Route::namespace('Criteria')->prefix('criteria')->group(function() {
+            Route::get('', 'CriteriaComparisonController@index');
+            Route::post('', 'CriteriaComparisonController@store');
+            Route::get('result', 'CriteriaAnalysisController@index');
+            Route::post('result', 'CriteriaAnalysisController@result');
+        });
     });
 });

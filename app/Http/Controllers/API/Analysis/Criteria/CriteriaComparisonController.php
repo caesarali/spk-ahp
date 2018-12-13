@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\API\Analysis;
+namespace App\Http\Controllers\API\Analysis\Criteria;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Analysis\CriteriaComparisonResource as Resource;
+use App\Http\Resources\Criteria\CriteriaComparisonMatrix as Resource;
 
 use App\Models\CriteriaComparison;
 
-class CriteriaAnalysisController extends Controller
+class CriteriaComparisonController extends Controller
 {
     public function index()
     {
-        $comparisonMatrix = CriteriaComparison::orderBy('first_criteria_id', 'asc')->get();
-        return Resource::collection($comparisonMatrix);
+        $comparisons = CriteriaComparison::all();
+        return Resource::collection($comparisons);
     }
 
     public function store(Request $request)
@@ -26,12 +26,12 @@ class CriteriaAnalysisController extends Controller
         $firstCriteria = $request->first_criteria_id;
         $secondCriteria = $request->second_criteria_id;
         if ($firstCriteria == $secondCriteria) {
-            $matrix = CriteriaComparison::updateOrCreate(
+            $comparison = CriteriaComparison::updateOrCreate(
                 ['first_criteria_id' => $firstCriteria, 'second_criteria_id' => $secondCriteria],
                 ['value' => 1]
             );
         } else {
-            $matrix = CriteriaComparison::updateOrCreate(
+            $comparison = CriteriaComparison::updateOrCreate(
                 ['first_criteria_id' => $firstCriteria, 'second_criteria_id' => $secondCriteria],
                 ['value' => $request->value]
             );
@@ -41,10 +41,5 @@ class CriteriaAnalysisController extends Controller
             );
         }
         return response()->json(['message' => 'Pembobotan disimpan!']);
-    }
-
-    public function result()
-    {
-
     }
 }

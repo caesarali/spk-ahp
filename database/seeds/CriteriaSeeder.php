@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use App\Models\Criteria;
+use App\Models\CriteriaComparison;
 
 class CriteriaSeeder extends Seeder
 {
@@ -22,7 +23,11 @@ class CriteriaSeeder extends Seeder
         ];
 
         foreach ($criterias as $criteria) {
-            Criteria::create($criteria);
+            $criteria = Criteria::create($criteria);
+            $comparison = CriteriaComparison::updateOrCreate(
+                ['first_criteria_id' => $criteria->id, 'second_criteria_id' => $criteria->id],
+                ['value' => 1]
+            );
         }
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Analysis;
+namespace App\Http\Resources\Criteria;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CriteriaComparisonResource extends JsonResource
+class CriteriaComparisonMatrix extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,7 +18,8 @@ class CriteriaComparisonResource extends JsonResource
             'id' => $this->id,
             'first_criteria_id' => $this->first_criteria_id,
             'second_criteria_id' => $this->second_criteria_id,
-            'value' => $this->value
+            'value' => $this->value,
+            'normalization_value' => $this->normalization_value
         ];
     }
 }

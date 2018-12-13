@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RolesSeeder::class);
         $this->call(CriteriaSeeder::class);
+        $this->call(RatingScaleSeeder::class);
     }
 }

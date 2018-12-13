@@ -12,7 +12,7 @@ import Alternative from '../pages/Admin/AlternativePage'
 // Analisis Components
 import Analysis from '../pages/AnalysisPage'
 import AnalysisCriteria from '../pages/AnalysisPage/AnalysisCriteriaPage'
-import AnalysisCriteriaResult from '../pages/AnalysisPage/AnalysisCriteriaPage/AnalysisCriteriaResult'
+import AnalysisCriteriaResult from '../pages/AnalysisPage/AnalysisCriteriaPage/Result'
 import AnalysisAlternative from '../pages/AnalysisPage/AnalysisAlternativePage'
 
 const router = new Router({

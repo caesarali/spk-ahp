@@ -19,7 +19,6 @@ class CreateCriteriaComparisonsTable extends Migration
             $table->float('value');
             $table->unsignedInteger('second_criteria_id');
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('first_criteria_id')->references('id')->on('criterias')->onDelete('cascade');
             $table->foreign('second_criteria_id')->references('id')->on('criterias')->onDelete('cascade');
