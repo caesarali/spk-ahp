@@ -48,7 +48,12 @@
                                     <td class="text-center">
                                         <span class="badge badge-info">{{ item.code }}</span>
                                     </td>
-                                    <td v-for="x in criterias.length" :key="x">-</td>
+                                    <td v-for="criteria in criterias" :key="criteria.id">
+                                        {{ showDetail(item, criteria) }}
+                                        <!-- <a href="#" @click.prevent="newDetail(criteria, item)" class="text-secondary">
+                                            +
+                                        </a> -->
+                                    </td>
                                     <td class="text-right" nowrap>
                                         <a href="#" @click.prevent="edit(item)" class="text-secondary mx-2">
                                             <i class="far fa-edit"></i>
@@ -92,7 +97,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-light px-3 py-4">
+                        <!-- <div class="bg-light px-3 py-4">
                             <h5 class="mb-0">Kriteria Alternatif / Wisma</h5>
                         </div>
                         <div class="modal-body pb-0">
@@ -102,11 +107,41 @@
                                     <input type="text" class="form-control">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                             <btn-default type="submit" :disabled="form.busy">
                                 <i class="fas mr-1" :class="[form.busy ? 'fa-spinner fa-spin' : 'fa-check']"></i> Simpan
+                            </btn-default>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="alternativeDetail" class="modal fade" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ detail.alternative_name }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form @submit.prevent="addDetail">
+                        <div class="modal-body pb-0">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ detail.criteria_name }}</label>
+                                <div class="col-md-9">
+                                    <input v-model="detail.value" type="text" class="form-control" :class="{ 'is-invalid': detail.errors.has('value') }" name="value" placeholder="...">
+                                    <has-error :form="detail" field="value"></has-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <btn-default type="submit" :disabled="detail.busy">
+                                <i class="fas mr-1" :class="[detail.busy ? 'fa-spinner fa-spin' : 'fa-check']"></i> Simpan
                             </btn-default>
                         </div>
                     </form>
@@ -123,10 +158,18 @@ export default {
             keyword: '',
             criterias: [],
             alternatives: [],
+            alternativeDetail: [],
             form: new Form({
                 id: '',
                 code: '',
-                name: '',
+                name: ''
+            }),
+            detail: new Form({
+                alternative_id: '',
+                alternative_name: '',
+                criteria_id: '',
+                criteria_name: '',
+                value: '',
             })
         }
     },
@@ -139,13 +182,16 @@ export default {
     },
     methods: {
         init() {
-            axios.all([this.getCriteria(), this.getAlternative()])
+            axios.all([this.getCriteria(), this.getAlternative(), this.getAlternativeDetail()])
         },
         getCriteria() {
             return axios.get('/criterias').then(({ data }) => { this.criterias = data.data })
         },
         getAlternative() {
             return axios.get('/alternatives').then(({ data }) => { this.alternatives = data.data })
+        },
+        getAlternativeDetail() {
+            return axios.get('/alternative/detail').then(({ data }) => { this.alternativeDetail = data.data })
         },
         create() {
             this.editmode = false;
@@ -160,7 +206,7 @@ export default {
                 toast({ type: 'success', text: data.message })
                 $('#alternativeModal').modal('hide');
             })
-            .catch()
+            .catch(() => {})
         },
         edit(data) {
             this.editmode = true;
@@ -176,7 +222,7 @@ export default {
                 toast({type: 'success', text: data.message});
                 $('#alternativeModal').modal('hide');
             })
-            .catch()
+            .catch(() => {})
         },
         destroy(id) {
             this.$confirm.delete().then((result) => {
@@ -190,6 +236,32 @@ export default {
                         toast({ type: 'error', title: 'Terjadi Kesalahan!' });
                     });
                 }
+            })
+        },
+
+        showDetail(alternative, criteria) {
+            let detail = this.alternativeDetail.filter(item => {
+                if (item.alternative_id == alternative.id && item.criteria_id == criteria.id) {
+                    return item;
+                }
+            })
+
+            return detail[0];
+        },
+        newDetail(criteria, alternative) {
+            this.detail.reset();
+            this.detail.clear();
+            this.detail.alternative_id = alternative.id,
+            this.detail.alternative_name = alternative.name,
+            this.detail.criteria_id = criteria.id,
+            this.detail.criteria_name = criteria.name
+
+            $('#alternativeDetail').modal('show');
+        },
+        addDetail() {
+            this.detail.post('/alternative/detail')
+            .then(({ data }) => {
+
             })
         }
     },

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\Master;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Master\AlternativeResource;
+use App\Http\Resources\Alternative\AlternativeResource;
 
 use App\Models\Alternative;
 

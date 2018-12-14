@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Master;
+namespace App\Http\Resources\Alternative;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+
+use App\Http\Resources\Criteria\CriteriaResource;
 
 class AlternativeResource extends JsonResource
 {
@@ -17,7 +19,7 @@ class AlternativeResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'code' => $this->code
+            'code' => $this->code,
         ];
     }
 }

@@ -21,6 +21,8 @@ Route::namespace('API')->group(function () {
     Route::namespace('Master')->group(function () {
         Route::apiResource('criterias', 'CriteriaController')->except('show');
         Route::apiResource('alternatives', 'AlternativeController')->except('show');
+        Route::get('alternative/detail', 'AlternativeDetailController@index');
+        Route::post('alternative/detail', 'AlternativeDetailController@add');
         Route::get('rating-scales', 'RatingScaleController@index');
     });
 
