@@ -34,7 +34,7 @@ export default {
 
     data() {
         return {
-            showDetails: false,
+            showDetails: true,
             criterias: [],
             total: [],
             result: [],

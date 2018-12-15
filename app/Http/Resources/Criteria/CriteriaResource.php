@@ -19,7 +19,7 @@ class CriteriaResource extends JsonResource
             'name' => $this->name,
             'code' => $this->code,
             'comparisons' => CriteriaComparisonMatrix::collection($this->comparisonsX),
-            'pv' => $this->priority->value,
+            'pv' => $this->priority->value ?? 0,
         ];
     }
 }
