@@ -27,4 +27,8 @@ class Criteria extends Model
     public function priority() {
         return $this->hasOne(CriteriaPriority::class);
     }
+
+    public function alternativeComparisons() {
+        return $this->hasMany(AlternativeComparison::class);
+    }
 }

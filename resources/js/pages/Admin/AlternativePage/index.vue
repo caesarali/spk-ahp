@@ -37,28 +37,30 @@
                                     <th width=10>#</th>
                                     <th>Name</th>
                                     <th class="text-center">Code</th>
-                                    <th v-for="item in criterias" :key="item.id">{{ item.name }}</th>
+                                    <th v-for="item in criterias" :key="item.id" class="text-center">{{ item.name }}</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in data" :key="item.id">
+                                <tr v-for="(alternative, index) in data" :key="alternative.id">
                                     <td>{{ index+1 }}.</td>
-                                    <td>{{ item.name }}</td>
-                                    <td class="text-center">
-                                        <span class="badge badge-info">{{ item.code }}</span>
+                                    <td nowrap>{{ alternative.name }}</td>
+                                    <td nowrap class="text-center">
+                                        <span class="badge badge-info">{{ alternative.code }}</span>
                                     </td>
-                                    <td v-for="criteria in criterias" :key="criteria.id">
-                                        {{ showDetail(item, criteria) }}
-                                        <!-- <a href="#" @click.prevent="newDetail(criteria, item)" class="text-secondary">
+                                    <td nowrap v-for="criteria in criterias" :key="criteria.id" class="text-center">
+                                        <a href="#" v-if="showDetail(alternative, criteria)" @click.prevent="editDetail(alternative, criteria)" class="text-body">
+                                            {{ showDetail(alternative, criteria) }}
+                                        </a>
+                                        <a href="#" v-else @click.prevent="newDetail(alternative, criteria)" class="text-body">
                                             +
-                                        </a> -->
+                                        </a>
                                     </td>
                                     <td class="text-right" nowrap>
-                                        <a href="#" @click.prevent="edit(item)" class="text-secondary mx-2">
+                                        <a href="#" @click.prevent="edit(alternative)" class="text-secondary mx-2">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <a href="#" @click.prevent="destroy(item.id)" class="text-secondary mx-2">
+                                        <a href="#" @click.prevent="destroy(alternative.id)" class="text-secondary mx-2">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
                                     </td>
@@ -97,17 +99,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="bg-light px-3 py-4">
-                            <h5 class="mb-0">Kriteria Alternatif / Wisma</h5>
-                        </div>
-                        <div class="modal-body pb-0">
-                            <div class="form-group row" v-for="item in criterias" :key="item.id">
-                                <label class="col-sm-3 col-form-label">{{ item.name }}</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                             <btn-default type="submit" :disabled="form.busy">
@@ -241,14 +232,12 @@ export default {
 
         showDetail(alternative, criteria) {
             let detail = this.alternativeDetail.filter(item => {
-                if (item.alternative_id == alternative.id && item.criteria_id == criteria.id) {
-                    return item;
-                }
+                return item.alternative_id == alternative.id && item.criteria_id == criteria.id
             })
 
-            return detail[0];
+            return detail.length ? detail[0].value : null;
         },
-        newDetail(criteria, alternative) {
+        newDetail(alternative, criteria) {
             this.detail.reset();
             this.detail.clear();
             this.detail.alternative_id = alternative.id,
@@ -258,10 +247,21 @@ export default {
 
             $('#alternativeDetail').modal('show');
         },
+        editDetail(alternative, criteria) {
+            this.detail.reset();
+            this.detail.clear();
+            let data = this.alternativeDetail.filter(item => {
+                return item.alternative_id == alternative.id && item.criteria_id == criteria.id
+            })
+            this.detail.fill(data[0]);
+
+            $('#alternativeDetail').modal('show');
+        },
         addDetail() {
             this.detail.post('/alternative/detail')
             .then(({ data }) => {
-
+                this.alternativeDetail = data.data
+                $('.modal').modal('hide')
             })
         }
     },

@@ -33,5 +33,10 @@ Route::namespace('API')->group(function () {
             Route::get('result', 'CriteriaAnalysisController@index');
             Route::post('result', 'CriteriaAnalysisController@result');
         });
+        Route::namespace('Alternative')->prefix('alternative')->group(function() {
+            Route::get('', 'AlternativeComparisonController@index');
+            Route::post('', 'AlternativeComparisonController@store');
+            Route::post('/{criteria}', 'AlternativeAnalysisController@analyze');
+        });
     });
 });

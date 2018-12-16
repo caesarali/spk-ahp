@@ -4,9 +4,7 @@ namespace App\Http\Resources\Alternative;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\Http\Resources\Criteria\CriteriaResource;
-
-class AlternativeResource extends JsonResource
+class AlternativeComparison extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +16,11 @@ class AlternativeResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'code' => $this->code,
-            'detail' => AlternativeDetail::collection($this->details)
+            'criteria_id' => $this->criteria_id,
+            'x_alternative_id' => $this->x_alternative_id,
+            'y_alternative_id' => $this->y_alternative_id,
+            'value' => $this->value,
+            'normalization_value' => $this->normalization_value
         ];
     }
 }
