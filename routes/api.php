@@ -37,6 +37,7 @@ Route::namespace('API')->group(function () {
             Route::get('', 'AlternativeComparisonController@index');
             Route::post('', 'AlternativeComparisonController@store');
             Route::post('/{criteria}', 'AlternativeAnalysisController@analyze');
+            Route::get('/{criteria}/result', 'AlternativeAnalysisController@result');
         });
     });
 });

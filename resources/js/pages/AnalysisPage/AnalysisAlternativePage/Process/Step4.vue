@@ -7,15 +7,17 @@
             <table class="table table-hover">
                 <tbody>
                     <tr class="table-info">
-                        <th class="text-center" :colspan="criterias.length">Matriks</th>
-                        <td class="text-center" :rowspan="criterias.length + 1"></td>
+                        <th class="text-center" :colspan="alternatives.length">Matriks</th>
+                        <td class="text-center" :rowspan="alternatives.length + 1"></td>
                         <th class="text-center">PV</th>
-                        <td class="text-center" :rowspan="criterias.length + 1"></td>
+                        <td class="text-center" :rowspan="alternatives.length + 1">
+                            <i class="fas fa-times"></i>
+                        </td>
                         <th class="text-center">Hasil</th>
                     </tr>
-                    <tr v-for="(criteria, index) in criterias" :key="criteria.id">
-                        <td class="text-center" v-for="comparison in criteria.comparisons" :key="comparison.id">{{ comparison.value }}</td>
-                        <td class="text-center">{{ criteria.pv }}</td>
+                    <tr v-for="(item, index) in alternatives" :key="item.id">
+                        <td class="text-center" v-for="comparison in item.comparisons" :key="comparison.id">{{ comparison.value }}</td>
+                        <td class="text-center">{{ item.pv }}</td>
                         <td class="text-center font-weight-bold">{{ result[index] }}</td>
                     </tr>
                 </tbody>
@@ -27,7 +29,7 @@
 <script>
 export default {
     props: {
-        criterias: Array,
+        alternatives: Array,
         total: Array,
         result: Array
     }

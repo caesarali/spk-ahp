@@ -2,11 +2,17 @@
     <section class="content mt-3">
         <div class="container">
             <div class="card card-info">
-                <div class="card-header">
+                <div class="card-header d-flex text-center text-sm-left">
+                    <a href="#" class="mr-3" @click.prevent="$router.go(-1)">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
                     Bobot Prioritas Kriteria
+                    <a href="#" class="ml-auto d-none d-sm-inline-block">
+                        <i class="fas fa-undo"></i>
+                    </a>
                 </div>
                 <div class="card-body">
-                    <canvas ref="myChart" style="min-height: 500px"></canvas>
+                    <canvas ref="myChart" style="min-height: 400px"></canvas>
                 </div>
             </div>
         </div>

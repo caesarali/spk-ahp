@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\Analysis\Alternative;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Alternative\AlternativeResource;
+use App\Http\Resources\Alternative\AlternativeComparisonSum;
 
 use App\Models\Criteria;
 use App\Models\Alternative;
@@ -39,9 +41,25 @@ class AlternativeAnalysisController extends Controller
         return response()->json(200);
     }
 
-    public function result()
+    public function result(Criteria $criteria)
     {
+        $alternatives = Alternative::orderBy('code', 'asc')->get();
+        $matrixMultiplication = [];
+        foreach ($alternatives as $alternative) {
+            $comparisons = $alternative->comparisonsX->where('criteria_id', $criteria->id);
+            $row = [];
+            foreach ($comparisons as $item) {
+                $value = $item->value;
+                $pv = $item->alternativeY->priority->where('criteria_id', $criteria->id)->first()->value;
+                $row[] = $value * $pv;
+            }
+            $matrixMultiplication[] = round(collect($row)->sum(), 5);
+        }
 
+        return AlternativeResource::collection($alternatives)->additional([
+            'matrix_sum_result' => AlternativeComparisonSum::collection($alternatives),
+            'matrix_multiplication_result' => $matrixMultiplication
+        ]);
     }
 
     public function resultAll()

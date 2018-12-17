@@ -183,7 +183,8 @@ export default {
         analyze() {
             this.analiting = true;
             axios.post('/analysis/alternative/' + this.selectedCriteria.id)
-            .then(() => toast({type: 'success', text: 'Success'}))
+            // .then(() => {})
+            .then(() => this.$router.push({ name: 'analysis.alternative.byCriteria', params: { criteriaId: this.selectedCriteria.id } }))
             .catch(({ response }) => toast({type: 'error', text: response.data}))
             .then(() => this.analiting = false)
         }

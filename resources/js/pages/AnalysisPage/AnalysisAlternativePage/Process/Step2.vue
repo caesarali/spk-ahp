@@ -7,14 +7,14 @@
             <table class="table table-hover">
                 <thead class="table-info">
                     <tr>
-                        <th class="text-center">Kriteria</th>
-                        <th class="text-center" v-for="item in criterias" :key="item.id">{{ item.code }}</th>
+                        <td class="text-center font-weight-bold">Alt<span class="d-none d-sm-inline">ernatif</span></td>
+                        <th class="text-center" v-for="item in alternatives" :key="item.id">{{ item.code }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="criteria in criterias" :key="criteria.id">
-                        <th class="text-center table-info">{{ criteria.code }}</th>
-                        <td class="text-center" v-for="comparison in criteria.comparisons" :key="comparison.id">{{ comparison.normalization_value }}</td>
+                    <tr v-for="item in alternatives" :key="item.id">
+                        <th class="text-center table-info">{{ item.code }}</th>
+                        <td class="text-center" v-for="comparison in item.comparisons" :key="comparison.id">{{ comparison.normalization_value }}</td>
                     </tr>
                     <tr>
                         <th class="text-center table-info">Jumlah</th>
@@ -29,7 +29,7 @@
 <script>
 export default {
     props: {
-        criterias: Array,
+        alternatives: Array,
         total: Array
     }
 }

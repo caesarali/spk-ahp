@@ -27,4 +27,8 @@ class Alternative extends Model
     public function comparisonsY() {
         return $this->hasMany(AlternativeComparison::class, 'y_alternative_id');
     }
+
+    public function priority() {
+        return $this->hasMany(AlternativePriority::class, 'alternative_id');
+    }
 }

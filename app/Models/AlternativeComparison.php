@@ -15,15 +15,15 @@ class AlternativeComparison extends Model
     }
 
     public function criteria() {
-        return $this->belongsTo(Criteria::class)->withTrash();
+        return $this->belongsTo(Criteria::class)->withTrashed();
     }
 
     public function alternativeX() {
-        return $this->belongsTo(Alternative::class, 'x_alternative_id')->withTrash();
+        return $this->belongsTo(Alternative::class, 'x_alternative_id')->withTrashed();
     }
 
     public function alternativeY() {
-        return $this->belongsTo(Alternative::class, 'y_alternative_id')->withTrash();
+        return $this->belongsTo(Alternative::class, 'y_alternative_id')->withTrashed();
     }
 
     public function normalization() {
