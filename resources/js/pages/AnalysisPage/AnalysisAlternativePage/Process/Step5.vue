@@ -12,15 +12,15 @@
             </p>
             <p>
                 <span class="font-weight-bold">λmax = </span>
-                <span v-for="(item, index) in criterias" :key="item.id">({{ result[index] }} / {{ item.pv }}) <span v-if="index < criterias.length - 1"> + </span> </span> / {{ criterias.length }}
+                <span v-for="(item, index) in alternatives" :key="item.id">({{ result[index] }} / {{ item.pv }}) <span v-if="index < alternatives.length - 1"> + </span> </span> / {{ alternatives.length }}
             </p>
             <p>
                 <span class="font-weight-bold">λmax = </span>
-                <span v-for="(item, index) in lambda" :key="index">{{ item }} <span v-if="index < lambda.length - 1"> + </span> </span> / {{ criterias.length }}
+                <span v-for="(item, index) in lambda" :key="index">{{ item }} <span v-if="index < lambda.length - 1"> + </span> </span> / {{ alternatives.length }}
             </p>
             <p>
                 <span class="font-weight-bold">λmax = </span>
-                {{ lambdaTotal }} / {{ criterias.length }} = <b><u>{{ lambdaMax }}</u></b>
+                {{ lambdaTotal }} / {{ alternatives.length }} = <b><u>{{ lambdaMax }}</u></b>
             </p>
         </div>
         <div class="p-3 bg-light">
@@ -32,7 +32,7 @@
             </p>
             <p>
                 <span class="font-weight-bold">CI = </span>
-                ({{ lambdaMax }} - {{ criterias.length }}) / ({{ criterias.length }} - 1)
+                ({{ lambdaMax }} - {{ alternatives.length }}) / ({{ alternatives.length }} - 1)
             </p>
             <p>
                 <span class="font-weight-bold">CI = </span>
@@ -65,24 +65,24 @@
 <script>
 export default {
     props: {
-        criterias: Array,
+        alternatives: Array,
         result: Array
     },
     computed: {
         lambda: function() {
-            return this.criterias.map((item, index) => {
+            return this.alternatives.map((item, index) => {
                 let lambda = this.result[index] / item.pv
-                return parseFloat(lambda.toFixed(4))
+                return parseFloat(lambda.toFixed(5))
             })
         },
         lambdaTotal: function () {
             return this.lambda.reduce((a, b) => a + b, 0)
         },
         lambdaMax: function() {
-            return (this.lambdaTotal / this.criterias.length).toFixed(4)
+            return (this.lambdaTotal / this.alternatives.length).toFixed(5)
         },
         ci: function () {
-            return (this.lambdaMax - this.criterias.length).toFixed(4) / (this.criterias.length - 1)
+            return (this.lambdaMax - this.alternatives.length).toFixed(5) / (this.alternatives.length - 1)
         },
         cr: function () {
             return this.ci / 1.12;

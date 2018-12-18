@@ -16,7 +16,7 @@
                     <tr v-for="item in alternatives" :key="item.id">
                         <th class="text-center table-info">{{ item.code }}</th>
                         <td class="text-center" v-for="comparison in item.comparisons" :key="comparison.id">{{ comparison.normalization_value }}</td>
-                        <td class="text-center bg-secondary font-weight-bold">{{ item.pv }}</td>
+                        <td class="text-center bg-light font-weight-bold">{{ item.pv }}</td>
                     </tr>
                 </tbody>
             </table>

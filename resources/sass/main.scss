@@ -5,6 +5,8 @@ $fa-font-path: "../webfonts";
 @import "~@fortawesome/fontawesome-free/scss/regular.scss";
 
 @import '~admin-lte/build/scss/AdminLTE.scss';
+// Animate.css
+@import '~animate.css/animate.min.css';
 
 .app-shadow {
     box-shadow: 0 2px 3px rgba(0,0,0,.16);

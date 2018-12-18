@@ -17,13 +17,14 @@ class AlternativeAnalysisController extends Controller
     public function analyze(Criteria $criteria)
     {
         $alternatives = Alternative::orderBy('code', 'asc')->get();
+
         // Cek apakah nilai matriks perbandingan berpasangan sudah lengkap atau belum
         $requiredOrdo = pow($alternatives->count(), 2);
         $availableOrdo = $criteria->alternativeComparisons->count();
         if ($requiredOrdo != $availableOrdo) {
             return response()->json('Matriks Perbandingan Berpasangan Belum Lengkap.', 403);
         }
-        //////////////////////////////////////////////////////////////////////////////
+
         foreach ($alternatives as $alternative) {
             $comparisons = $alternative->comparisonsY->where('criteria_id', $criteria->id);
             $total = $comparisons->sum('value');
@@ -35,7 +36,7 @@ class AlternativeAnalysisController extends Controller
             }
             AlternativePriority::updateOrCreate(
                 ['criteria_id' => $criteria->id, 'alternative_id' => $alternative->id],
-                ['value' => round($alternative->comparisonsX->avg('normalization_value'), 4)]
+                ['value' => round($alternative->comparisonsX->avg('normalization_value'), 5)]
             );
         }
         return response()->json(200);
@@ -44,6 +45,14 @@ class AlternativeAnalysisController extends Controller
     public function result(Criteria $criteria)
     {
         $alternatives = Alternative::orderBy('code', 'asc')->get();
+
+        // Cek apakah nilai matriks perbandingan berpasangan sudah lengkap atau belum
+        $requiredOrdo = pow($alternatives->count(), 2);
+        $availableOrdo = $criteria->alternativeComparisons->count();
+        if ($requiredOrdo != $availableOrdo) {
+            return response()->json('Matriks Perbandingan Berpasangan Belum Lengkap.', 403);
+        }
+
         $matrixMultiplication = [];
         foreach ($alternatives as $alternative) {
             $comparisons = $alternative->comparisonsX->where('criteria_id', $criteria->id);
@@ -58,7 +67,8 @@ class AlternativeAnalysisController extends Controller
 
         return AlternativeResource::collection($alternatives)->additional([
             'matrix_sum_result' => AlternativeComparisonSum::collection($alternatives),
-            'matrix_multiplication_result' => $matrixMultiplication
+            'matrix_multiplication_result' => $matrixMultiplication,
+            'by_criteria' => $criteria->name
         ]);
     }
 

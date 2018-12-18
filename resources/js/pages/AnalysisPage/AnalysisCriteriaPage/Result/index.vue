@@ -3,9 +3,7 @@
         <div class="container">
             <div class="card card-info">
                 <div class="card-header d-flex text-center text-sm-left">
-                    <a href="#" class="mr-3" @click.prevent="$router.go(-1)">
-                        <i class="fas fa-arrow-left"></i>
-                    </a>
+                    <link-back></link-back>
                     Bobot Prioritas Kriteria
                     <a href="#" class="ml-auto d-none d-sm-inline-block">
                         <i class="fas fa-undo"></i>
@@ -15,8 +13,16 @@
                     <canvas ref="myChart" style="min-height: 400px"></canvas>
                 </div>
             </div>
+            <div class="card" style="cursor: pointer" @click="showDetails ? showDetails = false : showDetails = true">
+                <div class="card-header border-0 d-flex">
+                    <span class="mr-1" v-html="showDetails ? 'Sembunyikan' : 'Tampilkan'"></span> Operasi Perhitungan
+                    <a href="#" class="ml-auto d-none d-sm-inline-block text-secondary">
+                        <i class="fas" :class="showDetails ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="container" v-if="showDetails">
+        <div class="container animated fadeIn" v-if="showDetails">
             <step-1 :criterias="criterias" :total="total" />
             <step-2 :criterias="criterias" :total="total" />
             <step-3 :criterias="criterias" :total="total" />
@@ -40,7 +46,7 @@ export default {
 
     data() {
         return {
-            showDetails: true,
+            showDetails: false,
             criterias: [],
             total: [],
             result: [],

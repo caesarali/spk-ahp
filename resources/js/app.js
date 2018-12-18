@@ -33,6 +33,7 @@ Vue.prototype.$confirm = new Confirm;
 
 // Global Components
 Vue.component('btn-default', require('./components/ui/buttons/BtnDefault'));
+Vue.component('link-back', require('./components/ui/buttons/LinkBack'));
 Vue.component('row-empty', require('./components/ui/table/RowEmpty'));
 Vue.component('maintenance', require('./components/MaintenanceComponent'));
 

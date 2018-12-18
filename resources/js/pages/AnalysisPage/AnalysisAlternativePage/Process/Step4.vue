@@ -8,10 +8,12 @@
                 <tbody>
                     <tr class="table-info">
                         <th class="text-center" :colspan="alternatives.length">Matriks</th>
-                        <td class="text-center" :rowspan="alternatives.length + 1"></td>
+                        <td class="text-center" :rowspan="alternatives.length + 1" style="vertical-align: middle">
+                            x
+                        </td>
                         <th class="text-center">PV</th>
-                        <td class="text-center" :rowspan="alternatives.length + 1">
-                            <i class="fas fa-times"></i>
+                        <td class="text-center" :rowspan="alternatives.length + 1" style="vertical-align: middle">
+                            =
                         </td>
                         <th class="text-center">Hasil</th>
                     </tr>
