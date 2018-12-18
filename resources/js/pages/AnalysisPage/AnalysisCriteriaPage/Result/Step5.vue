@@ -40,15 +40,35 @@
             </p>
         </div>
         <div class="p-3 bg-light">
+            Tabel Index Random <b>( IR )</b>
+        </div>
+        <div class="table-responsive">
+            <table class="table mb-0">
+                <tbody>
+                    <tr>
+                        <td class="table-info text-center font-weight-bold">n</td>
+                        <td class="text-center" :class="{ 'table-secondary font-weight-bold': item.n == ir.n }" v-for="item in indexRandom" :key="item.n">{{ item.n }}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-info text-center font-weight-bold">IR</td>
+                        <td class="text-center" :class="{ 'table-secondary  font-weight-bold': item.ir == ir.value }" v-for="item in indexRandom" :key="item.n">{{ item.ir }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="p-3 bg-light">
             Perhitungan Consistency Ratio <b>( CR )</b>
         </div>
         <div class="card-body">
+            <p>
+                <span class="font-weight-bold">IR = {{ ir.value }} </span>
+            </p>
             <p>
                 <span class="font-weight-bold">CR = CI / IR </span>
             </p>
             <p>
                 <span class="font-weight-bold">CR = </span>
-                {{ ci }} / 1.12
+                {{ ci }} / {{ ir.value }}
             </p>
             <p>
                 <span class="font-weight-bold">CR = </span>
@@ -66,7 +86,8 @@
 export default {
     props: {
         criterias: Array,
-        result: Array
+        result: Array,
+        indexRandom: Array
     },
     computed: {
         lambda: function() {
@@ -84,8 +105,21 @@ export default {
         ci: function () {
             return (this.lambdaMax - this.criterias.length).toFixed(4) / (this.criterias.length - 1)
         },
+        ir: function () {
+            let index = this.indexRandom.filter(item => {
+                return item.n == this.criterias.length
+            })
+
+            return index.map(item => {
+                return {
+                    n: item.n,
+                    value: item.ir
+                }
+            })[0]
+
+        },
         cr: function () {
-            return this.ci / 1.12;
+            return this.ci / this.ir.value;
         },
         consistency: function() {
             return (this.cr <= 0.1) ? '<u class="text-success">(KONSISTEN)</u>' : '<u class="text-danger">(TIDAK KONSISTEN)</u>'

@@ -3,84 +3,88 @@
         <div class="container">
             <div class="card card-info">
                 <div class="card-header d-flex text-center text-sm-left">
-                    <link-back></link-back>
-                    Bobot Prioritas Kriteria
-                    <a href="#" class="ml-auto d-none d-sm-inline-block">
-                        <i class="fas fa-undo"></i>
+                    Hasil / Kesimpulan Akhir
+                    <a href="#" class="ml-auto d-none d-sm-inline-block" @click.prevent="view == 'table' ? view='chart' : view='table' ">
+                        <i class="fas" :class="view == 'table' ? 'fa-chart-bar' : 'fa-table'"></i>
                     </a>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-0" v-show="view == 'table'">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center" v-for="item in criterias" :key="item.id">{{ item.name }}</th>
+                                <th class="text-center table-secondary">Bobot</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in alternatives" :key="item.id" :class="{ 'table-info': item.total == topPoint }">
+                                <td><b>{{ item.code + ' : ' +item.name }}</b></td>
+                                <td class="text-center" v-for="pv in item.priorities" :key="pv.id">{{ pv.value }}</td>
+                                <td class="text-center table-secondary" :class="{ 'font-weight-bold table-info': item.total == topPoint }">{{ item.total }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-body" v-show="view == 'chart'">
                     <canvas ref="myChart" style="min-height: 400px"></canvas>
                 </div>
-            </div>
-            <div class="card" style="cursor: pointer" @click="showDetails ? showDetails = false : showDetails = true">
-                <div class="card-header border-0 d-flex">
-                    <span class="mr-1" v-html="showDetails ? 'Sembunyikan' : 'Tampilkan'"></span> Operasi Perhitungan
-                    <a href="#" class="ml-auto d-none d-sm-inline-block text-secondary">
-                        <i class="fas" :class="showDetails ? 'fa-angle-up' : 'fa-angle-down'"></i>
-                    </a>
+                <div class="card-footer text-center py-4">
+                    <b>Kesimpulan</b> : Jadi, wisma yang disarankan oleh system adalah <b v-for="item in result" :key="item.id"><u>"{{ item.name }}"</u></b>
                 </div>
             </div>
-        </div>
-        <div class="container animated fadeIn" v-if="showDetails">
-            <step-1 :criterias="criterias" :total="total" />
-            <step-2 :criterias="criterias" :total="total" />
-            <step-3 :criterias="criterias" :total="total" />
-            <step-4 :criterias="criterias" :total="total" :result="result" />
-            <step-5 :criterias="criterias" :result="result" :indexRandom="indexRandom" />
         </div>
     </section>
 </template>
 
 <script>
-import Step1 from './Step1'
-import Step2 from './Step2'
-import Step3 from './Step3'
-import Step4 from './Step4'
-import Step5 from './Step5'
 import { Chart } from "chart.js";
 export default {
-    components: {
-        Step1, Step2, Step3, Step4, Step5
-    },
-
     data() {
         return {
-            showDetails: false,
-            criterias: [],
-            total: [],
-            result: [],
-            indexRandom: [],
+            view: 'table',
+            alternatives: [],
+            criterias: []
         }
     },
-
     watch: {
-        'criterias': function (value) {
+        'alternatives': function (value) {
             this.chart()
         }
     },
-
     computed: {
+        points() {
+            return this.alternatives.map(item => {
+                return item.total
+            })
+        },
+        topPoint() {
+            return this.points.sort(function (a, b) {
+                return b-a
+            })[0]
+        },
+        result() {
+            return this.alternatives.filter(item => {
+                return item.total == this.topPoint
+            })
+        },
         chartLabels() {
-            return this.criterias.map(item => {
+            return this.alternatives.map(item => {
                 return item.code + ' - ' + item.name
             })
         },
         chartValue() {
-            return this.criterias.map(item => {
-                return item.pv
+            return this.alternatives.map(item => {
+                return item.total
             })
         }
     },
-
     methods: {
         init() {
-            axios.get('/analysis/criteria/result')
+            axios.get('/analysis/result')
             .then(({ data }) => {
-                this.criterias = data.data
-                this.total = data.total
-                this.result = data.result
-                this.indexRandom = data.index_random
+                this.alternatives = data.data
+                this.criterias = data.criterias
             })
         },
         chart() {
@@ -90,7 +94,7 @@ export default {
                 labels  : labels,
                 datasets: [
                     {
-                        label : 'Kriteria',
+                        label : 'Alternatif',
                         borderColor : '#bee5eb',
                         backgroundColor : '#bee5eb',
                         data : value
@@ -132,7 +136,6 @@ export default {
             });
         }
     },
-
     created() {
         this.init()
     }

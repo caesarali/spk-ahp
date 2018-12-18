@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Alternative\AlternativeResource;
 use App\Http\Resources\Alternative\AlternativeComparisonSum;
+use App\Http\Resources\Master\IndexRandomResource;
 
 use App\Models\Criteria;
 use App\Models\Alternative;
 use App\Models\AlternativeNormalization;
 use App\Models\AlternativePriority;
+use App\Models\IndexRandom;
 
 class AlternativeAnalysisController extends Controller
 {
@@ -29,16 +31,20 @@ class AlternativeAnalysisController extends Controller
             $comparisons = $alternative->comparisonsY->where('criteria_id', $criteria->id);
             $total = $comparisons->sum('value');
             foreach ($comparisons as $comparison) {
-                AlternativeNormalization::updateOrCreate(
+                $normalization = AlternativeNormalization::updateOrCreate(
                     ['comparison_id' => $comparison->id],
                     ['value' => round($comparison->value / $total, 5)]
                 );
             }
-            AlternativePriority::updateOrCreate(
+        }
+
+        foreach ($alternatives as $alternative) {
+            $pv = AlternativePriority::updateOrCreate(
                 ['criteria_id' => $criteria->id, 'alternative_id' => $alternative->id],
-                ['value' => round($alternative->comparisonsX->avg('normalization_value'), 5)]
+                ['value' => $alternative->comparisonsX->where('criteria_id', $criteria->id)->avg('normalization_value')]
             );
         }
+
         return response()->json(200);
     }
 
@@ -65,15 +71,13 @@ class AlternativeAnalysisController extends Controller
             $matrixMultiplication[] = round(collect($row)->sum(), 5);
         }
 
+        $indexRandom = IndexRandom::orderBy('n', 'asc')->get();
+
         return AlternativeResource::collection($alternatives)->additional([
             'matrix_sum_result' => AlternativeComparisonSum::collection($alternatives),
             'matrix_multiplication_result' => $matrixMultiplication,
-            'by_criteria' => $criteria->name
+            'by_criteria' => $criteria->name,
+            'index_random' => IndexRandomResource::collection($indexRandom)
         ]);
-    }
-
-    public function resultAll()
-    {
-
     }
 }

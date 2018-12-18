@@ -14,7 +14,8 @@ import Analysis from '../pages/AnalysisPage'
 import AnalysisCriteria from '../pages/AnalysisPage/AnalysisCriteriaPage'
 import AnalysisCriteriaResult from '../pages/AnalysisPage/AnalysisCriteriaPage/Result'
 import AnalysisAlternative from '../pages/AnalysisPage/AnalysisAlternativePage'
-import AnalisisAlternativeByCriteria from "../pages/AnalysisPage/AnalysisAlternativePage/Process";
+import AnalisisAlternativeResult from "../pages/AnalysisPage/AnalysisAlternativePage/Result";
+import AnalysisResult from "../pages/AnalysisPage/AnalysisResult";
 
 const router = new Router({
     mode: 'history',
@@ -29,7 +30,8 @@ const router = new Router({
             { path: 'criterias', name: 'analysis.criteria', component: AnalysisCriteria },
             { path: 'criteria/result', name: 'analysis.criteria.result', component: AnalysisCriteriaResult },
             { path: 'alternatives', name: 'analysis.alternative', component: AnalysisAlternative },
-            { path: 'alternative/result/by-criteria-:criteriaId', name: 'analysis.alternative.byCriteria', component: AnalisisAlternativeByCriteria }
+            { path: 'alternative/result/by-criteria-:criteriaId', name: 'analysis.alternative.byCriteria', component: AnalisisAlternativeResult },
+            { path: 'result', name: 'analysis.result', component: AnalysisResult }
         ]},
         { path: '/admin', component: Admin, children: [
             { path: '', redirect: 'dashboard' },

@@ -39,5 +39,6 @@ Route::namespace('API')->group(function () {
             Route::post('/{criteria}', 'AlternativeAnalysisController@analyze');
             Route::get('/{criteria}/result', 'AlternativeAnalysisController@result');
         });
+        Route::get('result', 'ResultController@index');
     });
 });

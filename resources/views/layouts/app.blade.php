@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="api-base-url" content="{{ url('/api') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} - {{ config('app.fullname', '') }}</title>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -50,6 +50,10 @@
                         <router-link :to="{ name: 'analysis.alternative' }" class="dropdown-item">
                             Analisis Alternatif
                         </router-link>
+                        <div class="dropdown-divider"></div>
+                        <router-link :to="{ name: 'analysis.result' }" class="dropdown-item">
+                            Hasil Analisis
+                        </router-link>
                     </div>
                 </li>
             </ul>
@@ -65,10 +69,10 @@
         </nav>
 
         <aside class="main-sidebar sidebar-light-info elevation-4" style="overflow-x: hidden;">
-            <router-link :to="{ name: 'home' }" class="brand-link bg-info">
+            <a href="{{ url('/') }}" class="brand-link bg-info">
                 <img src="{{ asset('images/home.png') }}" alt="APP Logo" class="brand-image p-1 bg-white img-circle" style="opacity: .8">
                 <span class="brand-text font-weight-bold">{{ config('app.name', 'Laravel') }}</span>
-            </router-link>
+            </a>
 
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -82,13 +86,6 @@
 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item">
-                            <router-link :to="{ name: 'admin.dashboard' }" class="nav-link">
-                                <i class="fas fa-chart-bar nav-icon"></i>
-                                <p>Dashboard</p>
-                            </router-link>
-                        </li>
-
                         <li class="nav-header">DATA MASTER</li>
                         <li class="nav-item">
                             <router-link :to="{ name: 'admin.criterias' }" class="nav-link">

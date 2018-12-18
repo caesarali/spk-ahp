@@ -27,7 +27,7 @@
             <step-2 :alternatives="alternatives" :total="matrixSumResult" />
             <step-3 :alternatives="alternatives" :total="matrixSumResult" />
             <step-4 :alternatives="alternatives" :total="matrixSumResult" :result="matrixMultiplicationResult" />
-            <step-5 :alternatives="alternatives" :result="matrixMultiplicationResult" />
+            <step-5 :alternatives="alternatives" :result="matrixMultiplicationResult" :indexRandom="indexRandom" />
         </div>
     </section>
 </template>
@@ -50,6 +50,7 @@ export default {
             criteria: '',
             alternatives: [],
             matrixSumResult: [],
+            indexRandom: [],
             matrixMultiplicationResult: [],
         }
     },
@@ -81,6 +82,7 @@ export default {
                 this.matrixSumResult = data.matrix_sum_result
                 this.matrixMultiplicationResult = data.matrix_multiplication_result
                 this.criteria = data.by_criteria
+                this.indexRandom = data.index_random
             })
             .catch(({ response }) => {
                 this.$router.push({ name: 'analysis.alternative' })

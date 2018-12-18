@@ -7,7 +7,9 @@
     </div>
     <div class="card">
         <div class="card-body login-card-body">
-            <h3 class="login-box-msg font-weight-bold text-secondary">PILIH-WISMA</h3>
+            <h3 class="login-box-msg font-weight-bold text-secondary">
+                {{ config('app.name') }}
+            </h3>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group">
