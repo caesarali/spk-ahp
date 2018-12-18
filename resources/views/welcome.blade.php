@@ -27,6 +27,7 @@
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
         <style>
             html, body {
+                background: #e9ecef;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
