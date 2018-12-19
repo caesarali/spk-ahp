@@ -4596,25 +4596,6 @@ module.exports.options = __webpack_require__(232);
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var helpers = __webpack_require__(1);
-
-module.exports = {
-	/**
-	 * @private
-	 */
-	_set: function(scope, values) {
-		return helpers.merge(this[scope] || (this[scope] = {}), values);
-	}
-};
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -4720,6 +4701,25 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var helpers = __webpack_require__(1);
+
+module.exports = {
+	/**
+	 * @private
+	 */
+	_set: function(scope, values) {
+		return helpers.merge(this[scope] || (this[scope] = {}), values);
+	}
+};
 
 
 /***/ }),
@@ -5161,7 +5161,7 @@ module.exports = Element;
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
 var layouts = __webpack_require__(9);
 
@@ -5678,7 +5678,7 @@ module.exports = {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var Element = __webpack_require__(5);
 var helpers = __webpack_require__(1);
 var Ticks = __webpack_require__(11);
@@ -7161,7 +7161,7 @@ __webpack_require__(233)(Chart);
 
 Chart.Animation = __webpack_require__(31);
 Chart.animationService = __webpack_require__(32);
-Chart.defaults = __webpack_require__(2);
+Chart.defaults = __webpack_require__(3);
 Chart.Element = __webpack_require__(5);
 Chart.elements = __webpack_require__(7);
 Chart.Interaction = __webpack_require__(33);
@@ -34324,7 +34324,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(206)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(209)
 /* template */
@@ -35225,7 +35225,7 @@ Object.defineProperty(exports.prototype, 'chartInstance', {
 /* global window: false */
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
 
 defaults._set('global', {
@@ -35778,7 +35778,7 @@ module.exports = helpers.extend({
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
 
 defaults._set('global', {
@@ -36167,7 +36167,7 @@ module.exports = {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var Element = __webpack_require__(5);
 var helpers = __webpack_require__(1);
 
@@ -49113,8 +49113,8 @@ exports.positioners = positioners;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(162);
-__webpack_require__(311);
-module.exports = __webpack_require__(312);
+__webpack_require__(314);
+module.exports = __webpack_require__(315);
 
 
 /***/ }),
@@ -49166,7 +49166,7 @@ Vue.component('btn-default', __webpack_require__(299));
 Vue.component('link-back', __webpack_require__(302));
 Vue.component('row-empty', __webpack_require__(305));
 Vue.component('maintenance', __webpack_require__(308));
-Vue.component('chart-bar', __webpack_require__(329));
+Vue.component('chart-bar', __webpack_require__(311));
 
 var app = new Vue({
     el: '#app',
@@ -72497,7 +72497,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         return { x: 0, y: 0 };
     },
 
-    routes: [{ path: '/home', name: 'home', component: __WEBPACK_IMPORTED_MODULE_4__pages_Admin_DashboardPage___default.a }, { path: '/analysis', component: __WEBPACK_IMPORTED_MODULE_7__pages_AnalysisPage___default.a, children: [{ path: 'criterias', name: 'analysis.criteria', component: __WEBPACK_IMPORTED_MODULE_8__pages_AnalysisPage_AnalysisCriteriaPage___default.a }, { path: 'criteria/result', name: 'analysis.criteria.result', component: __WEBPACK_IMPORTED_MODULE_9__pages_AnalysisPage_AnalysisCriteriaPage_Result___default.a }, { path: 'alternatives', name: 'analysis.alternative', component: __WEBPACK_IMPORTED_MODULE_10__pages_AnalysisPage_AnalysisAlternativePage___default.a }, { path: 'alternative/result/by-criteria-:criteriaId', name: 'analysis.alternative.byCriteria', component: __WEBPACK_IMPORTED_MODULE_11__pages_AnalysisPage_AnalysisAlternativePage_Result___default.a }, { path: 'result', name: 'analysis.result', component: __WEBPACK_IMPORTED_MODULE_12__pages_AnalysisPage_AnalysisResult___default.a }] }, { path: '/admin', component: __WEBPACK_IMPORTED_MODULE_3__pages_Admin___default.a, children: [{ path: '', redirect: 'dashboard' }, { path: 'dashboard', name: 'admin.dashboard', component: __WEBPACK_IMPORTED_MODULE_4__pages_Admin_DashboardPage___default.a }, { path: 'criterias', name: 'admin.criterias', component: __WEBPACK_IMPORTED_MODULE_5__pages_Admin_CriteriaPage___default.a }, { path: 'alternatives', name: 'admin.alternatives', component: __WEBPACK_IMPORTED_MODULE_6__pages_Admin_AlternativePage___default.a }] }]
+    routes: [{ path: '/home', name: 'home', component: __WEBPACK_IMPORTED_MODULE_2__pages_HomePage___default.a }, { path: '/analysis', component: __WEBPACK_IMPORTED_MODULE_7__pages_AnalysisPage___default.a, children: [{ path: 'criterias', name: 'analysis.criteria', component: __WEBPACK_IMPORTED_MODULE_8__pages_AnalysisPage_AnalysisCriteriaPage___default.a }, { path: 'criteria/result', name: 'analysis.criteria.result', component: __WEBPACK_IMPORTED_MODULE_9__pages_AnalysisPage_AnalysisCriteriaPage_Result___default.a }, { path: 'alternatives', name: 'analysis.alternative', component: __WEBPACK_IMPORTED_MODULE_10__pages_AnalysisPage_AnalysisAlternativePage___default.a }, { path: 'alternative/result/by-criteria-:criteriaId', name: 'analysis.alternative.byCriteria', component: __WEBPACK_IMPORTED_MODULE_11__pages_AnalysisPage_AnalysisAlternativePage_Result___default.a }, { path: 'result', name: 'analysis.result', component: __WEBPACK_IMPORTED_MODULE_12__pages_AnalysisPage_AnalysisResult___default.a }] }, { path: '/admin', component: __WEBPACK_IMPORTED_MODULE_3__pages_Admin___default.a, children: [{ path: '', redirect: 'dashboard' }, { path: 'dashboard', name: 'admin.dashboard', component: __WEBPACK_IMPORTED_MODULE_4__pages_Admin_DashboardPage___default.a }, { path: 'criterias', name: 'admin.criterias', component: __WEBPACK_IMPORTED_MODULE_5__pages_Admin_CriteriaPage___default.a }, { path: 'alternatives', name: 'admin.alternatives', component: __WEBPACK_IMPORTED_MODULE_6__pages_Admin_AlternativePage___default.a }] }]
 });
 
 router.beforeResolve(function (to, from, next) {
@@ -75146,7 +75146,7 @@ if (inBrowser && window.Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(191)
 /* template */
@@ -75209,36 +75209,123 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            result: [],
+            criterias: [],
             alternatives: [],
-            criterias: []
+            colors: ['rgba(190, 229, 235, 0.7)', 'rgba(176, 221, 153, 0.7)', 'rgba(226, 193, 192, 0.7)']
         };
     },
 
+    watch: {
+        'result': function result() {
+            this.chart();
+        }
+    },
     computed: {
         chartLabels: function chartLabels() {
-            return this.alternatives.map(function (item) {
+            return this.criterias.map(function (item) {
                 return item.code + ' - ' + item.name;
             });
         },
-        chartValue: function chartValue() {
-            return this.alternatives.map(function (item) {
-                return item.total;
+        charDatasets: function charDatasets() {
+            var _this = this;
+
+            return this.result.map(function (item, index) {
+                return {
+                    label: item.name,
+                    borderColor: _this.colors[index],
+                    backgroundColor: _this.colors[index],
+                    data: item.criteria_priorities.map(function (pv) {
+                        return pv.value;
+                    })
+                };
             });
         }
     },
     methods: {
         init: function init() {
-            var _this = this;
+            var _this2 = this;
 
-            axios.get('/analysis/result').then(function (_ref) {
+            axios.get('/analysis/result/by-alternative').then(function (_ref) {
                 var data = _ref.data;
 
-                _this.alternatives = data.data;
-                _this.criterias = data.criterias;
+                _this2.result = data.data;
+                _this2.criterias = data.criterias;
+                _this2.alternatives = data.alternatives;
+            });
+        },
+        chart: function chart() {
+            var labels = this.chartLabels;
+            var value = this.chartValue;
+            var datasets = this.charDatasets;
+            var chartData = {
+                labels: labels,
+                datasets: datasets
+            };
+            var chartOptions = {
+                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+                scaleBeginAtZero: true,
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines: true,
+                //String - Colour of the grid lines
+                scaleGridLineColor: 'rgba(0,0,0,.05)',
+                //Number - Width of the grid lines
+                scaleGridLineWidth: 1,
+                //Boolean - Whether to show horizontal lines (except X axis)
+                scaleShowHorizontalLines: true,
+                //Boolean - Whether to show vertical lines (except Y axis)
+                scaleShowVerticalLines: true,
+                //Boolean - If there is a stroke on each bar
+                barShowStroke: true,
+                //Number - Pixel width of the bar stroke
+                barStrokeWidth: 2,
+                //Number - Spacing between each of the X value sets
+                barValueSpacing: 5,
+                //Number - Spacing between data sets within X values
+                barDatasetSpacing: 1,
+                //String - A legend template
+                legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                //Boolean - whether to make the chart responsive
+                responsive: true,
+                maintainAspectRatio: false
+            };
+
+            new Chart(this.$refs.myChart, {
+                type: 'bar',
+                data: chartData,
+                options: chartOptions
             });
         }
     },
@@ -75258,32 +75345,88 @@ var render = function() {
   return _c("section", { staticClass: "content mt-3" }, [
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "card card-info" }, [
-        _c(
-          "div",
-          { staticClass: "card-header d-flex text-center text-sm-left" },
-          [_vm._v("\n                Analisa Terakhir\n            ")]
-        ),
+        _vm._m(0),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "card-body" },
-          [
-            _vm.chartLabels.length > 0
-              ? _c("chart-bar", {
-                  attrs: {
-                    chartLabels: _vm.chartLabels,
-                    chartValue: _vm.chartValue
-                  }
+        _c("div", { staticClass: "card-body" }, [
+          _c("canvas", {
+            ref: "myChart",
+            staticStyle: { "min-height": "300px" }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-group" },
+        [
+          _c("div", { staticClass: "card card-info" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("table", { staticClass: "table" }, [
+              _c(
+                "thead",
+                _vm._l(_vm.criterias, function(item) {
+                  return _c("tr", { key: item.id }, [
+                    _c("th", [_vm._v(_vm._s(item.name))])
+                  ])
                 })
-              : _vm._e()
-          ],
-          1
-        )
-      ])
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.alternatives, function(item) {
+            return _c("div", { key: item.id, staticClass: "card card-info" }, [
+              _c("div", { staticClass: "card-header text-center" }, [
+                _c("b", [_vm._v(_vm._s(item.name))])
+              ]),
+              _vm._v(" "),
+              _c("table", { staticClass: "table" }, [
+                _c(
+                  "tbody",
+                  _vm._l(item.detail, function(detail) {
+                    return _c("tr", { key: detail.criteria_id }, [
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v(_vm._s(detail.value))
+                      ])
+                    ])
+                  })
+                )
+              ])
+            ])
+          })
+        ],
+        2
+      )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header d-flex text-center text-sm-left" },
+      [
+        _c("b", { staticClass: "mr-1" }, [
+          _c("u", [_vm._v("Hasil Analisa Terakhir")])
+        ]),
+        _vm._v(
+          " Berdasarkan dari kriteria masing-masing Alternatif\n            "
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header text-center" }, [
+      _c("b", [_vm._v("Detail")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -75298,7 +75441,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = null
 /* template */
@@ -75365,7 +75508,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(196)
 /* template */
@@ -75445,7 +75588,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(199)
 /* template */
@@ -76044,7 +76187,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(202)
 /* template */
@@ -76965,7 +77108,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(205)
 /* template */
@@ -77686,7 +77829,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(213)
 /* template */
@@ -77893,7 +78036,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(215)
 /* template */
@@ -78075,7 +78218,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(218)
 /* template */
@@ -78256,7 +78399,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(221)
 /* template */
@@ -78419,7 +78562,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(224)
 /* template */
@@ -78591,7 +78734,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(227)
 /* template */
@@ -78639,9 +78782,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
 //
 //
 //
@@ -78931,12 +79071,6 @@ var render = function() {
     _vm._m(5),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("p", [
-        _c("span", { staticClass: "font-weight-bold" }, [
-          _vm._v("IR = " + _vm._s(_vm.ir.value) + " ")
-        ])
-      ]),
-      _vm._v(" "),
       _vm._m(6),
       _vm._v(" "),
       _c("p", [
@@ -79051,7 +79185,7 @@ if (false) {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 
 defaults._set('global', {
 	responsive: true,
@@ -79686,7 +79820,7 @@ module.exports = {
 
 
 var color = __webpack_require__(30);
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
 var scaleService = __webpack_require__(6);
 
@@ -81511,7 +81645,7 @@ module.exports = {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var Element = __webpack_require__(5);
 var helpers = __webpack_require__(1);
 
@@ -81625,7 +81759,7 @@ module.exports = Element.extend({
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var Element = __webpack_require__(5);
 var helpers = __webpack_require__(1);
 
@@ -81723,7 +81857,7 @@ module.exports = Element.extend({
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var Element = __webpack_require__(5);
 var helpers = __webpack_require__(1);
 
@@ -81819,7 +81953,7 @@ module.exports = Element.extend({
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var Element = __webpack_require__(5);
 
 defaults._set('global', {
@@ -82530,7 +82664,7 @@ helpers.removeEvent = removeEventListener;
 
 var Animation = __webpack_require__(31);
 var animations = __webpack_require__(32);
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
 var Interaction = __webpack_require__(33);
 var layouts = __webpack_require__(9);
@@ -84177,7 +84311,7 @@ module.exports = function() {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
 var scaleService = __webpack_require__(6);
 var Ticks = __webpack_require__(11);
@@ -84732,7 +84866,7 @@ module.exports = function(Chart) {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
 var scaleService = __webpack_require__(6);
 var Ticks = __webpack_require__(11);
@@ -85273,7 +85407,7 @@ module.exports = function(Chart) {
 var moment = __webpack_require__(0);
 moment = typeof moment === 'function' ? moment : window.moment;
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
 var Scale = __webpack_require__(10);
 var scaleService = __webpack_require__(6);
@@ -86331,7 +86465,7 @@ webpackContext.id = 252;
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var elements = __webpack_require__(7);
 var helpers = __webpack_require__(1);
 
@@ -86819,7 +86953,7 @@ module.exports = function(Chart) {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var elements = __webpack_require__(7);
 var helpers = __webpack_require__(1);
 
@@ -86999,7 +87133,7 @@ module.exports = function(Chart) {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var elements = __webpack_require__(7);
 var helpers = __webpack_require__(1);
 
@@ -87307,7 +87441,7 @@ module.exports = function(Chart) {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var elements = __webpack_require__(7);
 var helpers = __webpack_require__(1);
 
@@ -87658,7 +87792,7 @@ module.exports = function(Chart) {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var elements = __webpack_require__(7);
 var helpers = __webpack_require__(1);
 
@@ -87920,7 +88054,7 @@ module.exports = function(Chart) {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var elements = __webpack_require__(7);
 var helpers = __webpack_require__(1);
 
@@ -88090,7 +88224,7 @@ module.exports = function(Chart) {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 
 defaults._set('scatter', {
 	hover: {
@@ -88280,7 +88414,7 @@ module.exports.title = __webpack_require__(270);
 
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var elements = __webpack_require__(7);
 var helpers = __webpack_require__(1);
 
@@ -88599,7 +88733,7 @@ module.exports = {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var Element = __webpack_require__(5);
 var helpers = __webpack_require__(1);
 var layouts = __webpack_require__(9);
@@ -89182,7 +89316,7 @@ module.exports = {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var Element = __webpack_require__(5);
 var helpers = __webpack_require__(1);
 var layouts = __webpack_require__(9);
@@ -89574,7 +89708,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(273)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(275)
 /* template */
@@ -90388,7 +90522,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(278)
 /* template */
@@ -90600,7 +90734,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(280)
 /* template */
@@ -90791,7 +90925,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(283)
 /* template */
@@ -90982,7 +91116,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(286)
 /* template */
@@ -91155,7 +91289,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(289)
 /* template */
@@ -91341,7 +91475,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(292)
 /* template */
@@ -91389,9 +91523,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
 //
 //
 //
@@ -91681,12 +91812,6 @@ var render = function() {
     _vm._m(5),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("p", [
-        _c("span", { staticClass: "font-weight-bold" }, [
-          _vm._v("IR = " + _vm._s(_vm.ir.value) + " ")
-        ])
-      ]),
-      _vm._v(" "),
       _vm._m(6),
       _vm._v(" "),
       _c("p", [
@@ -91941,7 +92066,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(296)
 /* template */
@@ -92353,7 +92478,7 @@ var Confirm = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(300)
 /* template */
@@ -92448,7 +92573,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(303)
 /* template */
@@ -92543,7 +92668,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(306)
 /* template */
@@ -92634,7 +92759,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(309)
 /* template */
@@ -93088,42 +93213,14 @@ if (false) {
 
 /***/ }),
 /* 311 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 312 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 313 */,
-/* 314 */,
-/* 315 */,
-/* 316 */,
-/* 317 */,
-/* 318 */,
-/* 319 */,
-/* 320 */,
-/* 321 */,
-/* 322 */,
-/* 323 */,
-/* 324 */,
-/* 325 */,
-/* 326 */,
-/* 327 */,
-/* 328 */,
-/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(330)
+var __vue_script__ = __webpack_require__(312)
 /* template */
-var __vue_template__ = __webpack_require__(331)
+var __vue_template__ = __webpack_require__(313)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -93162,7 +93259,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 330 */
+/* 312 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93226,7 +93323,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 331 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -93247,6 +93344,18 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-6904b95c", module.exports)
   }
 }
+
+/***/ }),
+/* 314 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 315 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

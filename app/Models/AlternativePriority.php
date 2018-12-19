@@ -11,4 +11,8 @@ class AlternativePriority extends Model
     public function criteria() {
         return $this->belongsTo(Criteria::class);
     }
+
+    public function alternative() {
+        return $this->belongsTo(Alternative::class);
+    }
 }

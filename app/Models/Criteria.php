@@ -31,4 +31,8 @@ class Criteria extends Model
     public function alternativeComparisons() {
         return $this->hasMany(AlternativeComparison::class);
     }
+
+    public function alternativePriorities() {
+        return $this->hasMany(AlternativePriority::class);
+    }
 }

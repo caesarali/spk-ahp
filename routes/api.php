@@ -40,5 +40,6 @@ Route::namespace('API')->group(function () {
             Route::get('/{criteria}/result', 'AlternativeAnalysisController@result');
         });
         Route::get('result', 'ResultController@index');
+        Route::get('result/by-alternative', 'ResultController@chartByAlternative');
     });
 });

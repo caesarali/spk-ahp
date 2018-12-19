@@ -61,9 +61,6 @@
         </div>
         <div class="card-body">
             <p>
-                <span class="font-weight-bold">IR = {{ ir.value }} </span>
-            </p>
-            <p>
                 <span class="font-weight-bold">CR = CI / IR </span>
             </p>
             <p>
