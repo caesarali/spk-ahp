@@ -9,34 +9,32 @@
                     <canvas ref="myChart" style="min-height: 300px"></canvas>
                 </div>
             </div>
-            <!-- <div class="row"> -->
-                <div class="card-group">
-                    <div class="card card-info">
-                        <div class="card-header text-center">
-                            <b>Detail</b>
-                        </div>
-                        <table class="table">
-                            <thead>
-                                <tr v-for="item in criterias" :key="item.id">
-                                    <th>{{ item.name }}</th>
-                                </tr>
-                            </thead>
-                        </table>
+            <div class="card-group">
+                <div class="card card-info">
+                    <div class="card-header text-center">
+                        <b>Detail</b>
                     </div>
-                    <div class="card card-info" v-for="item in alternatives" :key="item.id">
-                        <div class="card-header text-center">
-                            <b>{{ item.name }}</b>
-                        </div>
-                        <table class="table">
-                            <tbody>
-                                <tr v-for="detail in item.detail" :key="detail.criteria_id">
-                                    <td class="text-center">{{ detail.value }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="table">
+                        <tbody>
+                            <tr v-for="item in criterias" :key="item.id">
+                                <td>{{ item.name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            <!-- </div> -->
+                <div class="card card-info" v-for="item in alternatives" :key="item.id">
+                    <div class="card-header text-center">
+                        <b style="white-space: nowrap">{{ item.name }}</b>
+                    </div>
+                    <table class="table">
+                        <tbody>
+                            <tr v-for="detail in item.detail" :key="detail.criteria_id">
+                                <td class="text-center">{{ detail.value }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </section>
 </template>
