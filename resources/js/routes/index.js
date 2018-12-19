@@ -25,7 +25,7 @@ const router = new Router({
         return { x: 0, y: 0 }
     },
     routes: [
-        { path: '/home', name: 'home', redirect: '/admin' },
+        { path: '/home', name: 'home', component: Dashboard },
         { path: '/analysis', component: Analysis, children: [
             { path: 'criterias', name: 'analysis.criteria', component: AnalysisCriteria },
             { path: 'criteria/result', name: 'analysis.criteria.result', component: AnalysisCriteriaResult },

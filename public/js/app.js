@@ -49166,6 +49166,7 @@ Vue.component('btn-default', __webpack_require__(299));
 Vue.component('link-back', __webpack_require__(302));
 Vue.component('row-empty', __webpack_require__(305));
 Vue.component('maintenance', __webpack_require__(308));
+Vue.component('chart-bar', __webpack_require__(329));
 
 var app = new Vue({
     el: '#app',
@@ -72496,7 +72497,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         return { x: 0, y: 0 };
     },
 
-    routes: [{ path: '/home', name: 'home', redirect: '/admin' }, { path: '/analysis', component: __WEBPACK_IMPORTED_MODULE_7__pages_AnalysisPage___default.a, children: [{ path: 'criterias', name: 'analysis.criteria', component: __WEBPACK_IMPORTED_MODULE_8__pages_AnalysisPage_AnalysisCriteriaPage___default.a }, { path: 'criteria/result', name: 'analysis.criteria.result', component: __WEBPACK_IMPORTED_MODULE_9__pages_AnalysisPage_AnalysisCriteriaPage_Result___default.a }, { path: 'alternatives', name: 'analysis.alternative', component: __WEBPACK_IMPORTED_MODULE_10__pages_AnalysisPage_AnalysisAlternativePage___default.a }, { path: 'alternative/result/by-criteria-:criteriaId', name: 'analysis.alternative.byCriteria', component: __WEBPACK_IMPORTED_MODULE_11__pages_AnalysisPage_AnalysisAlternativePage_Result___default.a }, { path: 'result', name: 'analysis.result', component: __WEBPACK_IMPORTED_MODULE_12__pages_AnalysisPage_AnalysisResult___default.a }] }, { path: '/admin', component: __WEBPACK_IMPORTED_MODULE_3__pages_Admin___default.a, children: [{ path: '', redirect: 'dashboard' }, { path: 'dashboard', name: 'admin.dashboard', component: __WEBPACK_IMPORTED_MODULE_4__pages_Admin_DashboardPage___default.a }, { path: 'criterias', name: 'admin.criterias', component: __WEBPACK_IMPORTED_MODULE_5__pages_Admin_CriteriaPage___default.a }, { path: 'alternatives', name: 'admin.alternatives', component: __WEBPACK_IMPORTED_MODULE_6__pages_Admin_AlternativePage___default.a }] }]
+    routes: [{ path: '/home', name: 'home', component: __WEBPACK_IMPORTED_MODULE_4__pages_Admin_DashboardPage___default.a }, { path: '/analysis', component: __WEBPACK_IMPORTED_MODULE_7__pages_AnalysisPage___default.a, children: [{ path: 'criterias', name: 'analysis.criteria', component: __WEBPACK_IMPORTED_MODULE_8__pages_AnalysisPage_AnalysisCriteriaPage___default.a }, { path: 'criteria/result', name: 'analysis.criteria.result', component: __WEBPACK_IMPORTED_MODULE_9__pages_AnalysisPage_AnalysisCriteriaPage_Result___default.a }, { path: 'alternatives', name: 'analysis.alternative', component: __WEBPACK_IMPORTED_MODULE_10__pages_AnalysisPage_AnalysisAlternativePage___default.a }, { path: 'alternative/result/by-criteria-:criteriaId', name: 'analysis.alternative.byCriteria', component: __WEBPACK_IMPORTED_MODULE_11__pages_AnalysisPage_AnalysisAlternativePage_Result___default.a }, { path: 'result', name: 'analysis.result', component: __WEBPACK_IMPORTED_MODULE_12__pages_AnalysisPage_AnalysisResult___default.a }] }, { path: '/admin', component: __WEBPACK_IMPORTED_MODULE_3__pages_Admin___default.a, children: [{ path: '', redirect: 'dashboard' }, { path: 'dashboard', name: 'admin.dashboard', component: __WEBPACK_IMPORTED_MODULE_4__pages_Admin_DashboardPage___default.a }, { path: 'criterias', name: 'admin.criterias', component: __WEBPACK_IMPORTED_MODULE_5__pages_Admin_CriteriaPage___default.a }, { path: 'alternatives', name: 'admin.alternatives', component: __WEBPACK_IMPORTED_MODULE_6__pages_Admin_AlternativePage___default.a }] }]
 });
 
 router.beforeResolve(function (to, from, next) {
@@ -75197,8 +75198,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            alternatives: [],
+            criterias: []
+        };
+    },
+
+    computed: {
+        chartLabels: function chartLabels() {
+            return this.alternatives.map(function (item) {
+                return item.code + ' - ' + item.name;
+            });
+        },
+        chartValue: function chartValue() {
+            return this.alternatives.map(function (item) {
+                return item.total;
+            });
+        }
+    },
+    methods: {
+        init: function init() {
+            var _this = this;
+
+            axios.get('/analysis/result').then(function (_ref) {
+                var data = _ref.data;
+
+                _this.alternatives = data.data;
+                _this.criterias = data.criterias;
+            });
+        }
+    },
+    created: function created() {
+        this.init();
+    }
+});
 
 /***/ }),
 /* 192 */
@@ -75208,7 +75255,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("maintenance")
+  return _c("section", { staticClass: "content mt-3" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "card card-info" }, [
+        _c(
+          "div",
+          { staticClass: "card-header d-flex text-center text-sm-left" },
+          [_vm._v("\n                Analisa Terakhir\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "card-body" },
+          [
+            _vm.chartLabels.length > 0
+              ? _c("chart-bar", {
+                  attrs: {
+                    chartLabels: _vm.chartLabels,
+                    chartValue: _vm.chartValue
+                  }
+                })
+              : _vm._e()
+          ],
+          1
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -93024,6 +93097,156 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(330)
+/* template */
+var __vue_template__ = __webpack_require__(331)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/ui/chart/BarChart.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6904b95c", Component.options)
+  } else {
+    hotAPI.reload("data-v-6904b95c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 330 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        chartLabels: Array,
+        chartValue: Array
+    },
+    mounted: function mounted() {
+        var labels = this.chartLabels;
+        var value = this.chartValue;
+        var chartData = {
+            labels: labels,
+            datasets: [{
+                label: 'Alternatif',
+                borderColor: '#bee5eb',
+                backgroundColor: '#bee5eb',
+                data: value
+            }]
+        };
+        var chartOptions = {
+            //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+            scaleBeginAtZero: true,
+            //Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines: true,
+            //String - Colour of the grid lines
+            scaleGridLineColor: 'rgba(0,0,0,.05)',
+            //Number - Width of the grid lines
+            scaleGridLineWidth: 1,
+            //Boolean - Whether to show horizontal lines (except X axis)
+            scaleShowHorizontalLines: true,
+            //Boolean - Whether to show vertical lines (except Y axis)
+            scaleShowVerticalLines: true,
+            //Boolean - If there is a stroke on each bar
+            barShowStroke: true,
+            //Number - Pixel width of the bar stroke
+            barStrokeWidth: 2,
+            //Number - Spacing between each of the X value sets
+            barValueSpacing: 5,
+            //Number - Spacing between data sets within X values
+            barDatasetSpacing: 1,
+            //String - A legend template
+            legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+            //Boolean - whether to make the chart responsive
+            responsive: true,
+            maintainAspectRatio: false
+        };
+
+        new Chart(this.$refs.myChart, {
+            type: 'bar',
+            data: chartData,
+            options: chartOptions
+        });
+    }
+});
+
+/***/ }),
+/* 331 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("canvas", {
+    ref: "myChart",
+    staticStyle: { "min-height": "400px" }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6904b95c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
