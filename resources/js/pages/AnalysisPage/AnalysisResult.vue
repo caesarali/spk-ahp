@@ -8,18 +8,18 @@
                         <i class="fas" :class="view == 'table' ? 'fa-chart-bar' : 'fa-table'"></i>
                     </a>
                 </div>
-                <div class="card-body p-0" v-show="view == 'table'">
+                <div class="card-body p-0 table-responsive" v-show="view == 'table'">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th></th>
-                                <th class="text-center" v-for="item in criterias" :key="item.id">{{ item.name }}</th>
-                                <th class="text-center table-secondary">Bobot</th>
+                                <th nowrap class="text-center" v-for="item in criterias" :key="item.id">{{ item.name }}</th>
+                                <th nowrap class="text-center table-secondary">Bobot</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="item in alternatives" :key="item.id" :class="{ 'table-info': item.total == topPoint }">
-                                <td><b>{{ item.code + ' : ' +item.name }}</b></td>
+                                <td nowrap><b>{{ item.code + ' : ' +item.name }}</b></td>
                                 <td class="text-center" v-for="pv in item.priorities" :key="pv.id">{{ pv.value }}</td>
                                 <td class="text-center table-secondary" :class="{ 'font-weight-bold table-info': item.total == topPoint }">{{ item.total }}</td>
                             </tr>

@@ -58,8 +58,13 @@
                 </li>
             </ul>
 
+            <a href="{{ url('/') }}" class="brand-link bg-info mx-auto py-0 d-inline-block d-sm-none">
+                <img src="{{ asset('images/home.png') }}" alt="APP Logo" class="brand-image p-1 mt-0 ml-0 bg-white img-circle" style="opacity: .8">
+                <span class="brand-text font-weight-bold h3">{{ config('app.name', 'Laravel') }}</span>
+            </a>
+
             {{-- Right Menu --}}
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-sm-auto">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
                         <i class="fas fa-th-large"></i>
@@ -99,32 +104,41 @@
                                 <p>Data Alternatif</p>
                             </router-link>
                         </li>
-
-                        {{-- @if(Auth::user()->hasRole('superadmin'))
-                            <li class="nav-header">SPECIAL MENU</li>
-                            <li class="nav-item">
-                                <router-link :to="{ name: 'roles' }" class="nav-link">
-                                    <i class="fas fa-database nav-icon"></i>
-                                    <p>Access Control List</p>
-                                </router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link :to="{ name: 'provinces' }" class="nav-link">
-                                    <i class="fas fa-database nav-icon"></i>
-                                    <p>Laravolt</p>
-                                </router-link>
-                            </li>
-                        @endif --}}
                     </ul>
                 </nav>
             </div>
         </aside>
 
-        <div class="content-wrapper">
-            {{-- <div class="container"> --}}
-                    @yield('content')
-            {{-- </div> --}}
+        <div class="content-wrapper pb-5">
+            @yield('content')
         </div>
+
+        <nav class="navbar fixed-bottom footbar bg-white p-0 d-flex d-sm-none" style="border-top: 1px solid #dee2e6">
+            <div class="col text-center">
+                <router-link :to="{ name: 'home' }" class="navbar-brand text-secondary">
+                    <i class="fas fa-home"></i>
+                    <small class="d-block">Home</small>
+                </router-link>
+            </div>
+            <div class="col text-center">
+                <router-link :to="{ name: 'analysis.criteria' }" class="navbar-brand text-secondary">
+                    <i class="fas fa-table"></i>
+                    <small class="d-block">Kriteria</small>
+                </router-link>
+            </div>
+            <div class="col text-center">
+                <router-link :to="{ name: 'analysis.alternative' }" class="navbar-brand text-secondary">
+                    <i class="fas fa-table"></i>
+                    <small class="d-block">Alternatif</small>
+                </router-link>
+            </div>
+            <div class="col text-center">
+                <router-link :to="{ name: 'analysis.result' }" class="navbar-brand text-secondary">
+                    <i class="fas fa-poll"></i>
+                    <small class="d-block">Hasil</small>
+                </router-link>
+            </div>
+        </nav>
 
         <aside class="control-sidebar control-sidebar-light">
             <div class="p-3">

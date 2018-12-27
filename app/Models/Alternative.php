@@ -31,4 +31,8 @@ class Alternative extends Model
     public function priority() {
         return $this->hasMany(AlternativePriority::class, 'alternative_id');
     }
+
+    public function priorities() {
+        return $this->hasMany(AlternativePriority::class, 'alternative_id');
+    }
 }

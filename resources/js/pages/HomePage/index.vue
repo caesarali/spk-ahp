@@ -2,15 +2,15 @@
     <section class="content mt-3">
         <div class="container">
             <div class="card card-info">
-                <div class="card-header d-flex text-center text-sm-left">
-                    <b class="mr-1"><u>Hasil Analisa Terakhir</u></b> Berdasarkan dari kriteria masing-masing Alternatif
+                <div class="card-header text-center text-sm-left">
+                    <b><u>Hasil Analisa Terakhir</u></b> <span class="ml-1 d-none d-sm-inline">Berdasarkan dari kriteria masing-masing Alternatif</span>
                 </div>
                 <div class="card-body">
-                    <canvas ref="myChart" style="min-height: 300px"></canvas>
+                    <canvas nowrap ref="myChart" style="min-height: 300px"></canvas>
                 </div>
             </div>
             <div class="card-group">
-                <div class="card card-info">
+                <div class="card card-info d-none d-sm-flex">
                     <div class="card-header text-center">
                         <b>Detail</b>
                     </div>

@@ -18,7 +18,7 @@ class ByAlternativeResource extends JsonResource
             'id' => $this->id,
             'code' => $this->code,
             'name' => $this->name,
-            'criteria_priorities' => CriteriaPriorityResource::collection($this->priority->sortBy('alternative.code'))
+            'criteria_priorities' => CriteriaPriorityResource::collection($this->priority->sortBy('criteria.code'))
         ];
     }
 }

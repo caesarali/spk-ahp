@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Result\CriteriaPriorityResource;
 
 class AnalysisResultResource extends JsonResource
 {
@@ -18,7 +19,7 @@ class AnalysisResultResource extends JsonResource
             'id' => $this->id,
             'code' => $this->code,
             'name' => $this->name,
-            'priorities' => $this->priority->sortBy('criteria.code'),
+            'priorities' => CriteriaPriorityResource::collection($this->priority->sortBy('criteria.code')),
             'total' => $this->priority->sum('value'),
         ];
     }

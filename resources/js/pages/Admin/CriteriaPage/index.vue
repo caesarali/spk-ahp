@@ -15,7 +15,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-auto">
+                    <div class="col-auto d-none d-sm-block">
                         <btn-default :click="create">
                             <i class="fas fa-plus"></i>
                         </btn-default>
@@ -23,6 +23,10 @@
                 </div>
             </div>
         </section>
+
+        <btn-fly :click="create">
+            <i class="fas fa-plus"></i>
+        </btn-fly>
 
         <section class="content px-2">
             <div class="container">
