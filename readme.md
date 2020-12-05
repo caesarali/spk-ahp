@@ -33,3 +33,4 @@ Dokumentasi resmi Laravel dapat kamu temukan di [Laravel website](http://laravel
 #
 ### Seputar pertanyaan ? Kontak saya di:
 - [Facebook](https://facebook.com/caesaralilamondo)
+- [Twitter](https://twitter.com/caesarali_L)
