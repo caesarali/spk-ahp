@@ -1,10 +1,10 @@
 ## Sistem Pendukung Keputusan Pemilihan Wisma menggunakan Metode Analitical Hyrarcy Process (AHP)
 
-Aplikasi ini saya beri nama `SIPILMA`.
+Aplikasi `SIPILMA`.
 
 Aplikasi ini menggunakan Framework `Laravel version 5.7.x`
 
-Dokumentasi resmi Laravel dapat kamu temukan di [Laravel website](http://laravel.com/docs).
+Dokumentasi resmi Laravel dapat kamu temukan di [Laravel website](https://laravel.com/docs/5.7).
 
 # Untuk menggunakan aplikasi ini.
 
@@ -30,7 +30,8 @@ Dokumentasi resmi Laravel dapat kamu temukan di [Laravel website](http://laravel
 
 - Done.
 
-#
-### Temukan saya di:
+
+
+## Kontak saya di:
 - [Twitter](https://twitter.com/caesarali_L)
 - [Telegram](https://t.me/caesarali)
