@@ -6,7 +6,9 @@ Aplikasi ini menggunakan Framework `Laravel version 5.7.x`
 
 Dokumentasi resmi Laravel dapat kamu temukan di [Laravel website](https://laravel.com/docs/5.7).
 
-# Untuk menggunakan aplikasi ini.
+
+
+## Untuk menggunakan aplikasi ini.
 
 - Clone project from this repository
 
