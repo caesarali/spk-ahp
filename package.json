@@ -23,7 +23,7 @@
     "dependencies": {
         "admin-lte": "^3.0.0-alpha.2",
         "animate.css": "^3.7.0",
-        "chart.js": "^2.7.3",
+        "chart.js": "^2.9.4",
         "sweetalert2": "^7.29.2",
         "vform": "^1.0.0",
         "vue-progressbar": "^0.7.5",
